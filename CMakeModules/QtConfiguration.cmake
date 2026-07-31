@@ -25,6 +25,11 @@ if((NOT IS_DIRECTORY ${QTROOT}) AND (NOT "${QTROOT}" STREQUAL ""))
   file(WRITE ${QTROOT}/bin/qt.conf ${QTCONFCONTENT})
 endif()
 
+# Normalize Qt path so generated CMake scripts always use forward slashes.
+if(NOT "${QTROOT}" STREQUAL "")
+    file(TO_CMAKE_PATH "${QTROOT}" QTROOT)
+endif()
+
 message(STATUS "Qt root directory: ${QTROOT}")
 
 list(APPEND CMAKE_FIND_ROOT_PATH ${QTROOT})
